@@ -6,72 +6,57 @@ body {
     background-color: #F4F4F4;
 }
 
-#header-table {
+#top-bar {
+    display: flex;
     position: sticky;
-    top: 0px;
-    border-collapse: collapse;
-    border: none;
-    width: 100%;
+    flex-direction: row;
+    top: 0;
+    left: 0;
+    right: 0;
     background-color: #2A87CA;
+    text-align: center;
     font-size: 25px;
     font-weight: bold;
-    text-align: center;
     color: white;
-}
-#header-table th {
-    padding-top: 10px;
-    padding-bottom: 10px;
-}
-/* content table */
-
-#content-table {
-    border-collapse: collapse;
-    border: none;
-    width: 100%;
+    z-index: 9999;
 }
 
-/* side bar */
-#side-bar {
-    width: 17%;
-    background-color: #9FC2DC;
-
+#top-bar > img {
+    flex-basis: 15%;
 }
 
-#side-bar > div:first-child {
-    width: 90%;
-    font-family:  'IBM Plex Sans Thai',sans-serif;
-    font-size: 80%;
-    font-weight: bold;
-    background-color: #E5E7EB;
-    color: #4B5563;
-    border-radius: 5px;
-    margin: 30% auto 10% auto;
-    /* padding: 5px 0 5px 20px; */
-}
-#side-bar > div:first-child > h2{
-  margin: 2% 10% 2%;
+#top-bar > p:nth-child(2) {
+    flex-basis: 15%;
 }
 
-#side-bar div {
-    font-size: 80%;
-    width: 100%;
-    overflow: hidden;
-    border: 1px solid #000;
+#top-bar > p:nth-child(3) {
+    flex-basis: 30%;
 }
-#side-bar span {
-    display: inline-block;
+
+#top-bar > p:nth-child(4) {
+    flex-basis: 30%;
+}
+
+
+#top-bar > p:nth-child(5) {
+    flex-basis: 10%;
+}
+
+#top-bar img[src="./images/MyCourseVille.png"] {
+    width: 0%;
     max-width: 100%;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
-#side-bar img {
-    display: inline;
-    width: 24px;
+    max-height: 100%;
+    object-fit: contain;
+    background-color: white;
 }
 
+#content {
+    display: grid;
+    grid-template-columns: 15fr 85fr;   
+    grid-template-rows: 1fr 1fr;
+    overflow-wrap: break-word;
+}
 
-/* assignment */
-#assignment {
-
+#sidebar {
+    
 }
