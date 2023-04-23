@@ -80,6 +80,19 @@ body {
     background-color: #D9D9D9;
     border-radius: 25px;
     text-align: center;
+    padding: 15px;
+}
+
+.subject:hover {
+    background-color: #b1b1b1;
+    cursor: pointer;
+}
+
+.finished {
+    background-color: #D1E3B3;
+}
+.finished:hover {
+    background-color: #9ad48d;
 }
 
 .subject img,
@@ -88,6 +101,10 @@ body {
     margin: 0 auto;
     align-items: center;
     justify-content: center;
+}
+
+.subject img[alt="status-img"] {
+    width: 100px;
 }
 
 
