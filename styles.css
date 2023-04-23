@@ -127,6 +127,13 @@ body {
     cursor: pointer;
 }
 
+.course-selected {
+    background-color: #78b0db;
+    font-weight: 500;
+}
+
+
+
 .course img {
     width: 24px;
 }

@@ -55,6 +55,22 @@ var assignments = [
         status: true
     },
     {
+        date: {day: 31, month: 1, year: 2023},
+        courseName: "General Physics II",
+        courseID: "000004",
+        title: "Random Homework 1",
+        imgUrl: "gen-phy-ii.svg",
+        status: false
+    },
+    {
+        date: {day: 24, month: 4, year: 2023},
+        courseName: "General Physics II",
+        courseID: "000004",
+        title: "Random Homework 1",
+        imgUrl: "gen-phy-ii.svg",
+        status: false
+    },
+    {
         date: {day: 10, month: 6, year: 2023},
         courseName: "Calculus II",
         courseID: "000003",
