@@ -1,5 +1,5 @@
 
-import { drawAllAssignment, drawCourseAssignment } from './WebController/assignment.js';
+import { drawAllAssignment, drawCourseAssignment, drawCourseStatus } from './WebController/assignment.js';
 import { drawAllSignedCourse } from './WebController/course.js'
 
 import {assignments, signedCourse} from './demo.js';
@@ -17,6 +17,13 @@ document.getElementById("courses").addEventListener("click", function(event) {
     for(let i=0; i<document.querySelectorAll(".course").length; i++)
         document.querySelectorAll(".course")[i].classList.remove("course-selected");
     lastDrawAssignment = true;
+});
+
+// show only all, unfinished, finished
+var currentStatus = 0;
+document.getElementById("status").addEventListener("click", function(event) {
+    currentStatus = (currentStatus+1)%3;
+    drawCourseStatus(assignments, currentStatus);
 });
 
 for(let i=0; i<document.querySelectorAll(".course").length; i++) {

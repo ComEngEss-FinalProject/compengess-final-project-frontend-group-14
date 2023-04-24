@@ -64,6 +64,21 @@ body {
     max-block-size: 100%;
 }
 
+#status:hover {
+    color: grey;
+    cursor: pointer;
+}
+
+.status-all {
+    color: white;
+}
+.status-unfinished {
+    color: #F15A59;
+}
+.status-finished {
+    color: #98D8AA;
+}
+
 #top-bar img[alt="mcv-logo"] {
     max-width: 100%;
     max-height: 100%;
