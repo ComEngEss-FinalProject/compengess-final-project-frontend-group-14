@@ -1,49 +1,50 @@
 
-import { drawAllAssignment, drawCourseAssignment, drawCourseStatus } from './WebController/assignment.js';
+import { drawAssignment } from './WebController/assignment.js';
 import { drawAllSignedCourse } from './WebController/course.js'
 
-import {assignments, signedCourse} from './demo.js';
+import { assignments, signedCourse } from './demo.js';
+
+
+var currentCourseID = "All";
+var currentStatus = 0;
 
 
 drawAllSignedCourse(signedCourse);
-drawAllAssignment(assignments);
+drawAssignment(assignments, currentCourseID, currentStatus);
 
-var lastDrawAssignment = false; // to fix re-reload all course animation
-
-document.getElementById("courses").addEventListener("click", function(event) {
-    if(lastDrawAssignment)
+document.getElementById("courses").addEventListener("click", function (event) {
+    if (currentCourseID === "All")
         return;
-    drawAllAssignment(assignments);
-    for(let i=0; i<document.querySelectorAll(".course").length; i++)
+    currentCourseID = "All";
+    drawAssignment(assignments, currentCourseID, currentStatus);
+    for (let i = 0; i < document.querySelectorAll(".course").length; i++)
         document.querySelectorAll(".course")[i].classList.remove("course-selected");
-    lastDrawAssignment = true;
 });
 
 // show only all, unfinished, finished
-var currentStatus = 0;
-document.getElementById("status").addEventListener("click", function(event) {
-    currentStatus = (currentStatus+1)%3;
-    drawCourseStatus(assignments, currentStatus);
+document.getElementById("status").addEventListener("click", function (event) {
+    currentStatus = (currentStatus + 1) % 3;
+    drawAssignment(assignments, currentCourseID, currentStatus);
 });
 
-for(let i=0; i<document.querySelectorAll(".course").length; i++) {
-    document.querySelectorAll(".course")[i].addEventListener("click", function(event) {
+for (let i = 0; i < document.querySelectorAll(".course").length; i++) {
+    document.querySelectorAll(".course")[i].addEventListener("click", function (event) {
         const course = event.target.closest(".course");
         const id = course.id;
-        
-        if(course.classList.contains("course-selected")) {
+
+        if (course.classList.contains("course-selected")) {
             course.classList.remove("course-selected");
-            if(lastDrawAssignment)
+            if (currentCourseID === "All")
                 return;
-            drawAllAssignment(assignments),
-            lastDrawAssignment = true;
+            currentCourseID = "All";
+            drawAssignment(assignments, currentCourseID, currentStatus);
         }
         else {
-            for(let i=0; i<document.querySelectorAll(".course").length; i++)
+            for (let i = 0; i < document.querySelectorAll(".course").length; i++)
                 document.querySelectorAll(".course")[i].classList.remove("course-selected");
             course.classList.add("course-selected");
-            drawCourseAssignment(assignments, id);
-            lastDrawAssignment = false;
+            currentCourseID = id;
+            drawAssignment(assignments, currentCourseID, currentStatus);
         }
     });
 }

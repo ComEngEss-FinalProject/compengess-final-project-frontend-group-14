@@ -1,6 +1,4 @@
 
-import { drawCourseAssignment } from './assignment.js';
-
 function drawAllSignedCourse(courses) {
     const courseList = document.getElementById("course-list");
     courseList.innerHTML = ``;

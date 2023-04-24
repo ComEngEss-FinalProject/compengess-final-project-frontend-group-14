@@ -1,51 +1,28 @@
 
 const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
 
-function drawCourseAssignment(assignments, courseID) {
+function drawAssignment(assignments, courseID, courseStatus) {
     assignments.sort(dateSort);
+    setStatus(courseStatus);
     const assignmentList = document.getElementById("assignment");
     assignmentList.innerHTML = ``;
-    for(let i = 0; i<assignments.length; i++) {
-        if(courseID !== assignments[i].courseID )
+    for (let i = 0; i < assignments.length; i++) {
+        if(courseID !== "All" && courseID !== assignments[i].courseID)
+            continue;
+        if(courseStatus !== 0 && (courseStatus===1) === assignments[i].status)
             continue;
         addAssignment(assignments[i]);
     }
 }
 
-function drawAllAssignment(assignments) {
-    assignments.sort(dateSort);
-    const assignmentList = document.getElementById("assignment");
-    assignmentList.innerHTML = ``;
-    for (let i = 0; i < assignments.length; i++) 
-        addAssignment(assignments[i]);
-}
-
-function drawCourseStatus(assignments, courseStatus) {
+function setStatus(courseStatus) {
     const colors = ["status-all", "status-unfinished", "status-finished"];
-    console.log(colors[courseStatus]);
-
     const statusTag = document.getElementById("status");
     for(let i=0; i<colors.length; i++)
         if(statusTag.classList.contains(colors[i]))
             statusTag.classList.remove(colors[i]);
     statusTag.classList.add(colors[courseStatus]);
-
-    if(courseStatus===0){
-        drawAllAssignment(assignments);
-        return;
-    }
-
-    const assignmentList = document.getElementById("assignment");
-    assignmentList.innerHTML = ``;
-
-    const status = courseStatus===1?false:true;
-    for(let i = 0; i<assignments.length; i++) {
-        if(status !== assignments[i].status )
-            continue;
-        addAssignment(assignments[i]);
-    }
 }
-
 
 function dateSort(a, b) {
     a = a.date, b = b.date;
@@ -80,4 +57,4 @@ function addAssignment(assignment) {
         </div>`;
 }
 
-export {drawAllAssignment, drawCourseAssignment, drawCourseStatus };
+export {drawAssignment};
