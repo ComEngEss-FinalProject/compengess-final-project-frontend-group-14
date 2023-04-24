@@ -2,8 +2,12 @@
 import { drawAssignment } from './WebController/assignment.js';
 import { drawAllSignedCourse } from './WebController/course.js'
 
-import { assignments, signedCourse } from './demo.js';
+import { getSignedCourses, ExactAssignments } from './Util/CoursesExtractor.js'
+import { assignmentsObjAPI } from './demo.js';
 
+
+var assignments = ExactAssignments(assignmentsObjAPI);
+var signedCourse = getSignedCourses(assignmentsObjAPI);
 
 var currentCourseID = "All";
 var currentStatus = 0;
@@ -21,7 +25,7 @@ document.getElementById("courses").addEventListener("click", function (event) {
         document.querySelectorAll(".course")[i].classList.remove("course-selected");
 });
 
-// show only all, unfinished, finished
+
 document.getElementById("status").addEventListener("click", function (event) {
     currentStatus = (currentStatus + 1) % 3;
     drawAssignment(assignments, currentCourseID, currentStatus);

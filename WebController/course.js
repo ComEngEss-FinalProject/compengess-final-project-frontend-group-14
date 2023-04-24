@@ -7,7 +7,7 @@ function drawAllSignedCourse(courses) {
         `
         <div class="course" id="${courses[i].courseID}">
             <div>
-                <img src="./images/${courses[i].imgUrl}" alt="">
+                <img src=${courses[i].imgUrl} alt="">
                 <p>${courses[i].courseName}</p>
             </div>
         </div>

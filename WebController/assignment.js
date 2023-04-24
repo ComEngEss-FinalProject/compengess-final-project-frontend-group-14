@@ -7,7 +7,7 @@ function drawAssignment(assignments, courseID, courseStatus) {
     const assignmentList = document.getElementById("assignment");
     assignmentList.innerHTML = ``;
     for (let i = 0; i < assignments.length; i++) {
-        if(courseID !== "All" && courseID !== assignments[i].courseID)
+        if(courseID !== "All" && courseID != assignments[i].courseID)
             continue;
         if(courseStatus !== 0 && (courseStatus===1) === assignments[i].status)
             continue;
@@ -43,7 +43,7 @@ function addAssignment(assignment) {
             </div>
 
             <div>
-                <img src="./images/${assignment.imgUrl}" alt="">
+                <img src="${assignment.imgUrl}" alt="">
                 <p>${assignment.courseName}</p>
             </div>
 
