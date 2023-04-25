@@ -72,9 +72,11 @@ body {
 .status-all {
     color: white;
 }
+
 .status-unfinished {
     color: #F15A59;
 }
+
 .status-finished {
     color: #98D8AA;
 }
@@ -182,6 +184,7 @@ body {
 #info {
     margin-right: 10%;
 }
+
 #info img {
     width: 94px;
     border-radius: 17px;
@@ -195,26 +198,23 @@ body {
 }
 
 .subject {
+    opacity: 1;
     margin: 20px;
     font-size: 25px;
     display: flex;
     gap: 3em;
+    position: static;
     align-items: center;
     background-color: #D9D9D9;
     border-radius: 25px;
     padding: 15px;
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
-    animation: fade-in 1s ease-in, slide-in 1.5s ease-out;
+    animation: slide-in 0.75s ease;
+    animation-delay: calc(0.07s * var(--i));
 }
 
-@keyframes fade-in {
-    from {
-        opacity: 0;
-    }
-    to {
-        opactiy: 1;
-    }
-}
+
+
 @keyframes slide-in {
     from {
         margin-top: 100%;
@@ -233,6 +233,22 @@ body {
 
 .finished:hover {
     background-color: #9ad48d;
+}
+
+.late {
+    background-color: #FAD4D4;
+}
+
+.late:hover {
+    background-color: #EF9F9F;
+}
+
+.due-today {
+    background-color: #FFF9B6;
+}
+
+.due-today:hover {
+    background-color: #FFE699;
 }
 
 .subject img,

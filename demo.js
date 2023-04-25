@@ -90,7 +90,7 @@ var assignmentsObjAPI = [
                     "changed": 1681883728,
                     "instruction": "instruction 7",
                     "outdate": "2023-04-26",
-                    "duedate": "2023-04-26",
+                    "duedate": "2023-04-25",
                     "duetime": 1682528340
                 },
                 {

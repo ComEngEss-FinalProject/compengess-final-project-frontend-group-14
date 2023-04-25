@@ -42,6 +42,7 @@ for (let i = 0; i < document.querySelectorAll(".course").length; i++) {
                 return;
             currentCourseID = "All";
             drawAssignment(assignments, currentCourseID, currentStatus);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
         else {
             for (let i = 0; i < document.querySelectorAll(".course").length; i++)
@@ -49,6 +50,7 @@ for (let i = 0; i < document.querySelectorAll(".course").length; i++) {
             course.classList.add("course-selected");
             currentCourseID = id;
             drawAssignment(assignments, currentCourseID, currentStatus);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
     });
 }
