@@ -6,33 +6,33 @@ import { getSignedCourses, ExactAssignments } from './Util/CoursesExtractor.js'
 import { assignmentsObjAPI } from './demo.js';
 
 
-var assignments = ExactAssignments(assignmentsObjAPI);
-var signedCourse = getSignedCourses(assignmentsObjAPI);
+var assignments = await ExactAssignments(assignmentsObjAPI);
+var signedCourse = await getSignedCourses(assignmentsObjAPI);
 
 var currentCourseID = "All";
 var currentStatus = 0;
 
 
-drawAllSignedCourse(signedCourse);
-drawAssignment(assignments, currentCourseID, currentStatus);
+drawAllSignedCourse (signedCourse);
+await drawAssignment(assignments, currentCourseID, currentStatus);
 
-document.getElementById("courses").addEventListener("click", function (event) {
+document.getElementById("courses").addEventListener("click", async (event) => {
     if (currentCourseID === "All")
         return;
     currentCourseID = "All";
-    drawAssignment(assignments, currentCourseID, currentStatus);
+    await drawAssignment(assignments, currentCourseID, currentStatus);
     for (let i = 0; i < document.querySelectorAll(".course").length; i++)
         document.querySelectorAll(".course")[i].classList.remove("course-selected");
 });
 
 
-document.getElementById("status").addEventListener("click", function (event) {
+document.getElementById("status").addEventListener("click", async (event) => {
     currentStatus = (currentStatus + 1) % 3;
     drawAssignment(assignments, currentCourseID, currentStatus);
 });
 
 for (let i = 0; i < document.querySelectorAll(".course").length; i++) {
-    document.querySelectorAll(".course")[i].addEventListener("click", function (event) {
+    document.querySelectorAll(".course")[i].addEventListener("click", async (event) => {
         const course = event.target.closest(".course");
         const id = course.id;
 

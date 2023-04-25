@@ -1,5 +1,5 @@
 
-function drawAllSignedCourse(courses) {
+async function drawAllSignedCourse(courses) {
     const courseList = document.getElementById("course-list");
     courseList.innerHTML = ``;
     for(let i=0; i<courses.length; i++) {

@@ -30,7 +30,7 @@ signedCourse
 
 */
 
-function getSignedCourses(allCourseAssignments) {
+async function getSignedCourses(allCourseAssignments) {
     let uniqueCourse = [];
     for (let i = 0; i < allCourseAssignments.length; i++) {
         const currentCourse = allCourseAssignments[i];
@@ -62,7 +62,7 @@ function getSignedCourses(allCourseAssignments) {
     return uniqueCourse;
 }
 
-function ExactAssignments(allCourseAssignments) {
+async function ExactAssignments(allCourseAssignments) {
     let extractAssignments = [];
 
     for (let i = 0; i < allCourseAssignments.length; i++) {

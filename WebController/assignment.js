@@ -4,8 +4,8 @@ const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "
 
 
 
-function drawAssignment(assignments, courseID, courseStatus) {
-    assignments.sort(dateSort);
+async function drawAssignment(assignments, courseID, courseStatus) {
+    await assignments.sort(dateSort);
     setStatus(courseStatus);
     const assignmentList = document.getElementById("assignment");
     assignmentList.innerHTML = ``;
@@ -20,7 +20,7 @@ function drawAssignment(assignments, courseID, courseStatus) {
 
 
 
-function setStatus(courseStatus) {
+async function setStatus(courseStatus) {
     const colors = ["status-all", "status-unfinished", "status-finished"];
     const statusTag = document.getElementById("status");
     for (let i = 0; i < colors.length; i++)
@@ -44,7 +44,7 @@ function htmlToElement(html) {
     return template.content;
 }
 
-function addAssignment(assignment) {
+async function addAssignment(assignment) {
     const assignmentList = document.getElementById("assignment");
     const statusImgUrl = (assignment.status === false ? "uncheck.png" : "check.png");
     const date = assignment.date.day + " " + months[assignment.date.month] + " " + assignment.date.year
@@ -68,7 +68,7 @@ function addAssignment(assignment) {
 
     const assignmentCount = document.querySelectorAll(".subject").length + 1;
 
-    const singleAssignment = htmlToElement(`
+    const singleAssignment = await htmlToElement(`
     <div class="subject ${finishedStatus}" id="subject-${assignmentCount}" style="--i: ${assignmentCount};">
             <div>
                 <p>${date}</p>
@@ -89,7 +89,7 @@ function addAssignment(assignment) {
     </div>
     `).firstChild;
 
-    singleAssignment.addEventListener("click", (event) => {
+    singleAssignment.addEventListener("click", async (event) => {
         document.getElementById("background").classList.add("popup-bg-in");
         const popup = document.getElementById("popup-block");
         popup.classList.add("popup");
@@ -120,7 +120,7 @@ function addAssignment(assignment) {
 
             popup.classList.remove("popup");
             popup.classList.add("popup-out");
-            
+
             document.getElementById("background").classList.remove("popup-bg-in");
             document.getElementById("background").classList.add("popup-bg-out");
 
