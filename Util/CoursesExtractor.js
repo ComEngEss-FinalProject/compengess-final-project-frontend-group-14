@@ -9,8 +9,9 @@ Assignment
         courseSemester: 1,
         courseYear: "2022",
         title: "Final Project Preparation (Set up an EC2 instance)",
+        detail: "Go to Sleep zZz",
         date: { day: 12, month: 5, year: 2023 },
-        dueTime: 188882
+        dueTime: 188882,
         imgUrl: "com-eng-ess.png",
         status: true // dk how to get this info?
     }
@@ -79,6 +80,7 @@ function ExactAssignments(allCourseAssignments) {
                 courseSemester: courseSemester,
                 courseYear: courseYear,
                 title: currentCourse.assignment[j].title,
+                detail: currentCourse.assignment[j].instruction,
                 date: { day: date.getDate(), month: date.getMonth(), year: date.getFullYear() },
                 dueTime: currentCourse.assignment[j].duetime,
                 imgUrl: imgUrl,

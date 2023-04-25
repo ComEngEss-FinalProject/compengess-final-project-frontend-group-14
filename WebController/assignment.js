@@ -2,20 +2,23 @@
 const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
 
 
+
+
 function drawAssignment(assignments, courseID, courseStatus) {
     assignments.sort(dateSort);
     setStatus(courseStatus);
     const assignmentList = document.getElementById("assignment");
     assignmentList.innerHTML = ``;
-    let count = 0;
     for (let i = 0; i < assignments.length; i++) {
         if (courseID !== "All" && courseID != assignments[i].courseID)
             continue;
         if (courseStatus !== 0 && (courseStatus === 1) === assignments[i].status)
             continue;
-        addAssignment(assignments[i], ++count);
+        addAssignment(assignments[i]);
     }
 }
+
+
 
 function setStatus(courseStatus) {
     const colors = ["status-all", "status-unfinished", "status-finished"];
@@ -33,7 +36,15 @@ function dateSort(left, right) {
     if (a.day != b.day) return a.day - b.day;
     return right.dueTime - left.dueTime;
 }
-function addAssignment(assignment, assignmentCount) {
+
+function htmlToElement(html) {
+    const template = document.createElement("template");
+    html = html.trim();
+    template.innerHTML = html;
+    return template.content;
+}
+
+function addAssignment(assignment) {
     const assignmentList = document.getElementById("assignment");
     const statusImgUrl = (assignment.status === false ? "uncheck.png" : "check.png");
     const date = assignment.date.day + " " + months[assignment.date.month] + " " + assignment.date.year
@@ -51,12 +62,14 @@ function addAssignment(assignment, assignmentCount) {
         else // send assignment today
             finishedStatus = "due-today";
 
-        if(isLate)
+        if (isLate)
             finishedStatus = "late";
     }
 
-    assignmentList.innerHTML +=
-        `<div class="subject ${finishedStatus}" style="--i: ${assignmentCount};">
+    const assignmentCount = document.querySelectorAll(".subject").length + 1;
+
+    const singleAssignment = htmlToElement(`
+    <div class="subject ${finishedStatus}" id="subject-${assignmentCount}" style="--i: ${assignmentCount};">
             <div>
                 <p>${date}</p>
             </div>
@@ -73,7 +86,51 @@ function addAssignment(assignment, assignmentCount) {
             <div>
                 <img src="./images/${statusImgUrl}" alt="status-img">
             </div>
-        </div>`;
+    </div>
+    `).firstChild;
+
+    singleAssignment.addEventListener("click", (event) => {
+        document.getElementById("background").classList.add("popup-bg-in");
+        const popup = document.getElementById("popup-block");
+        popup.classList.add("popup");
+
+        if (popup.classList.contains("popup-out"))
+            popup.classList.remove("popup-out");
+
+        if (document.getElementById("background").classList.contains("popup-bg-out"))
+            document.getElementById("background").classList.remove("popup-bg-out");
+
+        const assignmentPopup = htmlToElement(`
+        <div id="close-button">
+            <img src="./images/close.png" alt="close-button">
+        </div>
+        <div class="course-img">
+            <img src="${assignment.imgUrl}" alt="course image">
+        </div>
+        <div class="assignment-title">
+            <h1>${assignment.courseName}</h1>
+            <h2>${assignment.title}</h2>
+        </div>
+        <div class="assignment-desc">
+            <p>${assignment.detail}</p>
+        </div>
+        `);
+
+        assignmentPopup.getElementById("close-button").addEventListener("click", (event) => {
+
+            popup.classList.remove("popup");
+            popup.classList.add("popup-out");
+            
+            document.getElementById("background").classList.remove("popup-bg-in");
+            document.getElementById("background").classList.add("popup-bg-out");
+
+            popup.innerHTML = ``;
+        });
+
+        popup.appendChild(assignmentPopup);
+    });
+    assignmentList.appendChild(singleAssignment);
+
 }
 
 export { drawAssignment };

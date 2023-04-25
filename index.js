@@ -49,8 +49,8 @@ for (let i = 0; i < document.querySelectorAll(".course").length; i++) {
                 document.querySelectorAll(".course")[i].classList.remove("course-selected");
             course.classList.add("course-selected");
             currentCourseID = id;
+            window.scrollTo({ top: 0, behavior: 'instant' });
             drawAssignment(assignments, currentCourseID, currentStatus);
-            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
     });
 }
