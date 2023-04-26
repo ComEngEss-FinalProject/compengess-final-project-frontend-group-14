@@ -11,7 +11,7 @@ async function drawAssignment(assignments, courseID, courseStatus) {
         return;
     }
 
-    await assignments.sort(dateSort);
+    assignments.sort(dateSort);
     setStatus(courseStatus);
     const assignmentList = document.getElementById("assignment");
     assignmentList.innerHTML = ``;
@@ -74,7 +74,7 @@ async function addAssignment(assignment) {
 
     const assignmentCount = document.querySelectorAll(".subject").length + 1;
 
-    const singleAssignment = await htmlToElement(`
+    const singleAssignment = htmlToElement(`
     <div class="subject ${finishedStatus}" id="subject-${assignmentCount}" style="--i: ${assignmentCount};">
             <div>
                 <p>${date}</p>

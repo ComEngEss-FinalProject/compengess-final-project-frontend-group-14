@@ -1,10 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@400;500;700&family=Montserrat:wght@400;500;600;700&display=swap');
 
-* {
-    -webkit-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-}
+
 
 body {
     font-family: 'Montserrat', sans-serif;
@@ -14,6 +10,11 @@ body {
 
 /* Top bar */
 #top-bar {
+
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+
     display: flex;
     position: sticky;
     width: 100%;
@@ -211,26 +212,36 @@ body {
 }
 
 .subject {
-    opacity: 1;
+
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+
     margin: 20px;
     font-size: 25px;
     display: flex;
     gap: 3em;
-    position: static;
+    position: relative;
     align-items: center;
     background-color: #D9D9D9;
     border-radius: 17px;
     padding: 15px;
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
-    animation: slide-in 0.75s ease;
-    animation-delay: calc(0.07s * var(--i));
+    animation: fade-in 0.4s ease-in-out;
+    animation-iteration-count: 1;
+    animation-fill-mode: both;
+    animation-delay: calc(0.3s / var(--i) );
 }
 
 
 
-@keyframes slide-in {
-    from {
-        margin-top: 100%;
+@keyframes fade-in {
+    0% {
+        opacity: 0;
+        right: 0;
+    }
+    100% {
+        opacity: 1;
     }
 }
 

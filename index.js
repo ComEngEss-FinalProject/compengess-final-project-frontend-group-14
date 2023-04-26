@@ -1,6 +1,6 @@
 
 import { drawAssignment } from './WebController/assignment.js';
-import { drawAllSignedCourse, drawAllYears } from './WebController/course.js'
+import { drawAllSignedCourse, drawAllYears } from './WebController/sidenav.js'
 
 import { getSignedCourses, ExtractAssignments } from './Util/CoursesExtractor.js';
 
@@ -17,59 +17,26 @@ document.querySelector("button").addEventListener("click", async (event) => {
     authorizeApplication();
 })
 
-var signedCourse, assignments;
+let allSignedCourse, allAssignments;
+let signedCourse, assignments;
 
 document.addEventListener("DOMContentLoaded", async (event) => {
     getUserProfile();
 
-    document.getElementById("courses").addEventListener("click", async (event) => {
-        if (currentCourseID === "All")
-            return;
-        currentCourseID = "All";
-        await drawAssignment(assignments, currentCourseID, currentStatus);
-        for (let i = 0; i < document.querySelectorAll(".course").length; i++)
-            document.querySelectorAll(".course")[i].classList.remove("course-selected");
-    });
+    await getAllAssignments();
 
+    allAssignments = assignments = await ExtractAssignments(assignmentsObj);
+    allSignedCourse = signedCourse = await getSignedCourses(assignmentsObj);
 
-    document.getElementById("status").addEventListener("click", async (event) => {
-        currentStatus = (currentStatus + 1) % 3;
-        drawAssignment(assignments, currentCourseID, currentStatus);
-    });
-
-    await getAllAssignments(currentYear, currentSemester);
-
-    assignments = await ExtractAssignments(assignmentsObj);
-    signedCourse = await getSignedCourses(assignmentsObj);
-
-    await drawAllSignedCourse(signedCourse, assignments, currentCourseID, currentStatus);
-    // await drawAllYears(signedCourse);
+    drawAllSignedCourse(signedCourse, assignments, currentCourseID, currentStatus);
+    drawAllYears(signedCourse, assignments, currentCourseID, currentStatus);
     await drawAssignment(assignments, currentCourseID, currentStatus);
 });
 
-// show only selected year -> (show courses only register in that currenYear, and Semester too)
-for (let i = 0; i < document.querySelectorAll(".year").length; i++) {
-    document.querySelectorAll(".year")[i].addEventListener("click", async (event) => {
-        const year = event.target.closest(".year");
-        const id = year.id;
-
-        if (year.classList.contains("year-selected")) { // deselect when click again
-            year.classList.remove("year-selected");
-            currentYear = 0;
-
-            drawAll();
-        }
-        else {
-            for (let i = 0; i < document.querySelectorAll(".year").length; i++)
-                document.querySelectorAll(".year")[i].classList.remove("year-selected");
-
-            year.classList.add("year-selected");
-            currentYear = parseInt(id.substr(2)); // Y-2020
-
-            drawAll();
-        }
-    });
-}
+document.getElementById("status").addEventListener("click", async (event) => {
+    currentStatus = (currentStatus + 1) % 3;
+    drawAssignment(assignments, currentCourseID, currentStatus);
+});
 
 // show only selected semester -> (show courses only register in that currenYear, and Semester too)
 for (let i = 0; i < document.querySelectorAll(".semester").length; i++) {
@@ -94,10 +61,16 @@ for (let i = 0; i < document.querySelectorAll(".semester").length; i++) {
     });
 }
 
+
 const drawAll = async () => {
-    await getAllAssignments(currentYear, currentSemester);
-    assignments = await ExtractAssignments(assignmentsObj);
-    signedCourse = await getSignedCourses(assignmentsObj);
+    assignments = allAssignments.filter(assignment => 
+        (assignment.courseYear == currentYear || currentYear==0) &&
+        (assignment.courseSemester == currentSemester || currentSemester==0)
+    );
+    signedCourse = allSignedCourse.filter(course => 
+        (course.courseYear == currentYear || currentYear==0) &&
+        (course.courseSemester == currentSemester || currentSemester==0)
+    );
     drawAllSignedCourse(signedCourse, assignments, currentCourseID, currentStatus);
     drawAssignment(assignments, currentCourseID, currentStatus);
     window.scrollTo({ top: 0, behavior: 'smooth' });

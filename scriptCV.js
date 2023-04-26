@@ -15,27 +15,19 @@ const getUserProfile = async () => {
     await fetch(`http://${backendIPAddress}/courseville/get_profile_info`, options)
         .then((response) => response.json())
         .then((data) => {
-            document.querySelectorAll("#info > p")[1].innerHTML = `${data.user.firstname_th} ${data.user.lastname_th}`;
+            document.querySelector("#info>img").setAttribute("src", `${data.account.profile_pict}`);
+            document.querySelectorAll("#info > p")[0].innerHTML = `${data.student.id}`;
+            document.querySelectorAll("#info > p")[1].innerHTML = `${data.student.firstname_th} ${data.student.lastname_th}`;
         })
         .catch((error) => console.error(error));
 };
 
-const getAllAssignments = async (year, semester) => {
-    year = year==0 ? "" : `year=${year}`;
-    semester = semester==0 ? "" : `semester=${semester}`;
-    
-    let qry = "";
-    if(year != "" && semester != "") qry = `?${year}&${semester}`;
-    else if(year != "") qry = `?${year}`;
-    else if(semester != "") qry = `?${semester}`;
-
-    console.log("get data ", qry);
-
+const getAllAssignments = async () => {
     const options = {
         mehtod: 'GET',
         credentials: 'include',
     }
-    await fetch(`http://${backendIPAddress}/courseville/getAllAssignments${qry}`, options)
+    await fetch(`http://${backendIPAddress}/courseville/getAllAssignments`, options)
         .then((response) => response.json())
         .then((data) => {
             assignmentsObj = data;
