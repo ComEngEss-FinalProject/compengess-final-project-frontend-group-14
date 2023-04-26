@@ -35,6 +35,9 @@ async function getSignedCourses(allCourseAssignments) {
     for (let i = 0; i < allCourseAssignments.length; i++) {
         const currentCourse = allCourseAssignments[i];
 
+        if(currentCourse.assignment_length == 0)
+            continue;
+            
         const courseID = currentCourse.course_cv_cid;
         const courseName = currentCourse.title;
         const courseSemester = currentCourse.semester;
@@ -62,9 +65,9 @@ async function getSignedCourses(allCourseAssignments) {
     return uniqueCourse;
 }
 
-async function ExactAssignments(allCourseAssignments) {
-    let extractAssignments = [];
 
+async function ExtractAssignments(allCourseAssignments) {
+    let extractAssignments = [];
     for (let i = 0; i < allCourseAssignments.length; i++) {
         const currentCourse = allCourseAssignments[i];
         const courseID = currentCourse.course_cv_cid;
@@ -92,4 +95,4 @@ async function ExactAssignments(allCourseAssignments) {
     return extractAssignments;
 }
 
-export { getSignedCourses, ExactAssignments };
+export { getSignedCourses, ExtractAssignments };

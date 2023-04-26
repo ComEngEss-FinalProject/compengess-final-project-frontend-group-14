@@ -1,5 +1,5 @@
 
-var assignmentsObjAPI = [
+var assignmentsObj = [
     {
         "course_cv_cid": 32200,
         "title": "Programming Methodology I [Section 1-2 and 33]",
@@ -217,4 +217,4 @@ var assignmentsObjAPI = [
 
 ];
 
-export { assignmentsObjAPI };
+export { assignmentsObj };

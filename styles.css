@@ -1,5 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@400;500;700&family=Montserrat:wght@400;500;600;700&display=swap');
 
+* {
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
 
 body {
     font-family: 'Montserrat', sans-serif;
@@ -114,7 +119,8 @@ body {
     margin: 5% 4%;
 }
 
-.catagories > div {
+
+.catagories>div {
     overflow: hidden;
     color: #4B5563;
     padding-left: 10%;
@@ -122,16 +128,17 @@ body {
     border-radius: 5px;
 }
 
+.catagories>div:hover {
+    background-color: #d3d3d3;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+}
+
 .catagories h2 {
     margin: 0% 0%;
 }
 
-.catagories:hover {
-    background-color: #c9cccf;
-    cursor: pointer;
-}
-
-.course>div {
+.course>div, .year>div, .semester>div {
     width: 80%;
     margin-left: 20px;
     gap: 5px;
@@ -144,20 +151,20 @@ body {
     color: #343434;
 }
 
-.course:hover {
+.course:hover, .year:hover, .semester:hover {
     background-color: #78b0db;
     font-weight: 500;
     cursor: pointer;
 }
 
-.course-selected {
+.course-selected, .year-selected, .semester-selected {
     background-color: #78b0db;
     font-weight: 500;
 }
 
 
 
-.course img {
+.course img, .year img, .semester img {
     width: 24px;
 }
 
@@ -359,15 +366,17 @@ body {
 
     animation: popup-slide-in 0.75s;
 }
+
 .popup::-webkit-scrollbar {
     display: none;
 }
 
-@keyframes popup-slide-in{
+@keyframes popup-slide-in {
     from {
         opacity: 0;
         margin-top: 100%;
     }
+
     to {
         opacity: 1;
         margin: 0% 30%;
@@ -394,15 +403,18 @@ body {
     visibility: hidden;
     animation: popup-slide-out 0.75s;
 }
+
 .popup-out::-webkit-scrollbar {
     display: none;
 }
+
 @keyframes popup-slide-out {
     from {
         opacity: 1;
         margin: 0% 30%;
         visibility: visible;
     }
+
     to {
         visibility: hidden;
         opacity: 0;
@@ -451,9 +463,12 @@ body {
     align-items: center;
 }
 
-.assignment-title h1, .assignment-title h2 {
+.assignment-title h1,
+.assignment-title h2 {
     margin: 0;
+    width: 70%;
 }
+
 .assignment-title h2 {
     font-weight: 500;
 }

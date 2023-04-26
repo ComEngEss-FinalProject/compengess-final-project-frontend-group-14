@@ -5,6 +5,12 @@ const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "
 
 
 async function drawAssignment(assignments, courseID, courseStatus) {
+    
+    if (!Array.isArray(assignments)) {
+        console.error("The 'assignments' parameter is not an array.");
+        return;
+    }
+
     await assignments.sort(dateSort);
     setStatus(courseStatus);
     const assignmentList = document.getElementById("assignment");

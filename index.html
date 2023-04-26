@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MyCourse Assigment List</title>
     <link rel="stylesheet" href="./styles.css">
+    <script src="./index.js" type="module" defer></script>
 </head>
 
 <body>
@@ -33,40 +34,70 @@
     </div>
 
     <div id="sidenav">
-
+        <!-- year -->
         <div id="year" class="catagories">
             <div>
                 <h2>Year</h2>
             </div>
         </div>
 
+        <div id="year-list">
+            <div class="year" id="Y-2022">
+                <div>
+                    <p>2022</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- semester -->
         <div id="semester" class="catagories">
             <div>
                 <h2>Semester</h2>
             </div>
         </div>
 
+        <div id="semester-list">
+            <div class="semester" id="S-1">
+                <div>
+                    <img src="./images/semester-1.png" alt="cee-logl">
+                    <p>Semester 1</p>
+                </div>
+
+            </div>
+            
+            <div class="semester" id="S-2">
+
+                <div>
+                    <img src="./images/semester-2.png" alt="cee-logl">
+                    <p>Semester 2</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- course -->
         <div id="courses" class="catagories">
             <div>
                 <h2>Courses</h2>
             </div>
+
         </div>
 
-
         <div id="course-list">
-            <div class="course">
+            <div class="course" id="23222">
                 <div>
-                    <img src="./images/com-eng-ess.png" alt="cee-logl">
+                    <img src="" alt="cee-logl">
                     <p>Computer Engineering Essentials</p>
                 </div>
             </div>
         </div>
 
+        <!-- profile & logout -->
         <div id="buttom-panel">
+            <button> login </button>
             <div>
                 <img id="logout" src="./images/logout.png" alt="logout">
             </div>
-
+            
             <div id="info">
                 <img src="./images/ProfilePic.svg" alt="profile-pic">
                 <p>6530000021</p>
@@ -79,10 +110,10 @@
 
     <div id="background"></div>
     <div id="popup-block"></div>
-<!--  
-    
 
-    <div class="popup">
+
+
+    <!-- <div class="popup">
         <div id="close-button">
             <img src="./images/close.png" alt="close-button">
         </div>
@@ -90,14 +121,14 @@
             <img src="./images/prog_meth.png" alt="course image">
         </div>
         <div class="assignment-title">
-            <h1>Programming methology</h1>
+            <h1>Programming Methodology I [Section 1-2 and 33]</h1>
             <h2>Laboratory number 2</h2>
         </div>
         <div class="assignment-desc">
             <p>Lab100</p>
         </div>
-    </div>
--->
+    </div> -->
+
 
 
     <div id="assignment">
@@ -108,7 +139,7 @@
             </div>
 
             <div>
-                <img src="./images/com-eng-ess.png" alt="">
+                <img src="" alt="">
                 <p>Computer Engineering Essentials</p>
             </div>
 
@@ -124,7 +155,6 @@
 
     </div>
 
-    <script src="./index.js" type="module"></script>
 </body>
 
 </html>
