@@ -4,6 +4,7 @@ Extract example
 Assignment
 [
     {
+        assignmentID: "948056",
         courseID: "000001",
         courseName: "Computer Engineering Essentials",
         courseSemester: 1,
@@ -78,6 +79,7 @@ async function ExtractAssignments(allCourseAssignments) {
         for (let j = 0; j < currentCourse.assignment_length; j++) {
             const date = new Date(currentCourse.assignment[j].duedate);
             extractAssignments.push({
+                assignmentID: currentCourse.assignment[j].itemid,
                 courseID: courseID,
                 courseName: courseName,
                 courseSemester: courseSemester,
