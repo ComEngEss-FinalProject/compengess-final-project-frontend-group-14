@@ -15,10 +15,6 @@ let currentProperty = {
     status: 0
 }
 
-document.querySelector("button").addEventListener("click", async (event) => {
-    authorizeApplication();
-})
-
 let allSignedCourse, allAssignments;
 let signedCourse, assignments;
 

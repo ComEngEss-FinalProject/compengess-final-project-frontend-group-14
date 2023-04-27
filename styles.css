@@ -139,7 +139,9 @@ body {
     margin: 0% 0%;
 }
 
-.course>div, .year>div, .semester>div {
+.course>div,
+.year>div,
+.semester>div {
     width: 80%;
     margin-left: 20px;
     gap: 5px;
@@ -152,20 +154,26 @@ body {
     color: #343434;
 }
 
-.course:hover, .year:hover, .semester:hover {
+.course:hover,
+.year:hover,
+.semester:hover {
     background-color: #78b0db;
     font-weight: 500;
     cursor: pointer;
 }
 
-.course-selected, .year-selected, .semester-selected {
+.course-selected,
+.year-selected,
+.semester-selected {
     background-color: #78b0db;
     font-weight: 500;
 }
 
 
 
-.course img, .year img, .semester img {
+.course img,
+.year img,
+.semester img {
     width: 24px;
 }
 
@@ -199,6 +207,10 @@ body {
     margin-right: 10%;
 }
 
+#info p {
+    margin: 3px;
+}
+
 #info img {
     width: 94px;
     border-radius: 17px;
@@ -230,7 +242,7 @@ body {
     animation: fade-in 0.4s ease-in-out;
     animation-iteration-count: 1;
     animation-fill-mode: both;
-    animation-delay: calc(0.3s / var(--i) );
+    animation-delay: calc(0.3s / var(--i));
 }
 
 
@@ -240,6 +252,7 @@ body {
         opacity: 0;
         right: 0;
     }
+
     100% {
         opacity: 1;
     }
@@ -492,4 +505,65 @@ body {
     margin-left: 10%;
     margin-right: 10%;
     overflow-wrap: break-word;
+}
+
+.mcv-login {
+    height: 100%;
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    z-index: 1;
+    top: 10;
+    left: 0;
+    overflow-x: hidden;
+    padding-top: 20px;
+    background-color: #9FC2DC;
+}
+
+.mcv-login > img {
+    width: 45rem;
+    padding-bottom: 20%;
+    padding-top: auto;
+}
+
+.mcv-login::-webkit-scrollbar {
+    display: none;
+}
+
+.login-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-left: 70%;
+    min-height:  70vh;
+}
+
+.login-container h1 {
+    margin: 0;
+    margin-top: 20%;
+    font-size: 2.5rem;
+    color: #BAA8FF;
+}
+.login-container h3 {
+    margin: 0;
+    margin-top: 10px;
+    font-weight: 400;
+}
+
+#login {
+    width: 30%;
+    text-align: center;
+    color: white;
+    margin-top: 20%;
+    border-radius: 15px;
+    background-color: #7C81FF;
+}
+
+#login:hover {
+    background-color: #5e63ff;
+    cursor: pointer;
 }

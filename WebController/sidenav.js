@@ -145,6 +145,8 @@ async function drawAllYears(allAssignments, allSignedCourse, signedCourse, assig
 
             currentProperty.semester = 0;
             currentProperty.courseID = "All";
+            for (let i = 0; i < document.querySelectorAll(".semester").length; i++)
+                    document.querySelectorAll(".semester")[i].classList.remove("semester-selected");
 
             drawAll(allAssignments, allSignedCourse, signedCourse, assignments, currentProperty)
 
