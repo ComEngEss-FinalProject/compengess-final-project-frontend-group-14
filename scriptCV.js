@@ -5,7 +5,7 @@ const authorizeApplication = () => {
     window.location.href = `http://${backendIPAddress}/courseville/auth_app`;
 };
 
-let assignmentsObj;
+let assignmentsObj, loginStatus = false;
 
 const getUserProfile = async () => {
     const options = {
@@ -40,4 +40,4 @@ const logout = async () => {
   };
 
 
-export { authorizeApplication ,getUserProfile, getAllAssignments, logout, assignmentsObj  };
+export { authorizeApplication ,getUserProfile, getAllAssignments, logout, assignmentsObj, loginStatus };

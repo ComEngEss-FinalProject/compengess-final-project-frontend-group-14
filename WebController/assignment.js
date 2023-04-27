@@ -4,21 +4,17 @@ const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "
 
 
 
-async function drawAssignment(assignments, courseID, courseStatus) {
-    
-    if (!Array.isArray(assignments)) {
-        console.error("The 'assignments' parameter is not an array.");
-        return;
-    }
-
+async function drawAssignment(assignments, currentProperty) {
     assignments.sort(dateSort);
-    setStatus(courseStatus);
+    setStatus(currentProperty.status);
     const assignmentList = document.getElementById("assignment");
     assignmentList.innerHTML = ``;
     for (let i = 0; i < assignments.length; i++) {
-        if (courseID !== "All" && courseID != assignments[i].courseID)
+        if (currentProperty.courseID !== "All" && currentProperty.courseID != assignments[i].courseID)
             continue;
-        if (courseStatus !== 0 && (courseStatus === 1) === assignments[i].status)
+        if (currentProperty.status !== 0 && (currentProperty.status === 1) === assignments[i].status)
+            continue;
+        if (currentProperty.semester !== 0 && currentProperty.semester != assignments[i].courseSemester)
             continue;
         addAssignment(assignments[i]);
     }
@@ -118,11 +114,11 @@ async function addAssignment(assignment) {
             <h2>${assignment.title}</h2>
         </div>
         <div class="assignment-desc">
-            <p>${assignment.detail}</p>
+            ${assignment.detail}
         </div>
         `);
 
-        assignmentPopup.getElementById("close-button").addEventListener("click", (event) => {
+        const closePopup = (event) => {
 
             popup.classList.remove("popup");
             popup.classList.add("popup-out");
@@ -131,7 +127,10 @@ async function addAssignment(assignment) {
             document.getElementById("background").classList.add("popup-bg-out");
 
             popup.innerHTML = ``;
-        });
+        }
+        assignmentPopup.getElementById("close-button").addEventListener("click", closePopup);
+        document.getElementById("background").addEventListener("click", closePopup);
+        
 
         popup.appendChild(assignmentPopup);
     });
