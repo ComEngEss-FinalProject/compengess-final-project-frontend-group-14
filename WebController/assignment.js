@@ -1,7 +1,5 @@
 
-const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
-
-
+import { addItem } from "../scripts/scriptItems";
 
 
 async function drawAssignment(assignments, currentProperty) {
@@ -19,8 +17,6 @@ async function drawAssignment(assignments, currentProperty) {
         addAssignment(assignments[i]);
     }
 }
-
-
 
 async function setStatus(courseStatus) {
     const colors = ["status-all", "status-unfinished", "status-finished"];
@@ -47,9 +43,11 @@ function htmlToElement(html) {
 }
 
 async function addAssignment(assignment) {
+    const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
     const assignmentList = document.getElementById("assignment");
     const statusImgUrl = (assignment.status === false ? "uncheck.png" : "check.png");
-    const date = assignment.date.day + " " + months[assignment.date.month] + " " + assignment.date.year
+    const date = assignment.date.day + " " + months[assignment.date.month] + " " + assignment.date.year;
+    const assignmentID = assignment.assignment_id;
 
     let finishedStatus = (assignment.status === false ? "" : "finished");
     if (finishedStatus === "") {
@@ -71,7 +69,7 @@ async function addAssignment(assignment) {
     const assignmentCount = document.querySelectorAll(".subject").length + 1;
 
     const singleAssignment = htmlToElement(`
-    <div class="subject ${finishedStatus}" id="subject-${assignmentCount}" style="--i: ${assignmentCount};">
+    <div class="subject ${finishedStatus}" id="${assignmentID}" style="--i: ${assignmentCount};">
             <div>
                 <p>${date}</p>
             </div>
@@ -86,12 +84,53 @@ async function addAssignment(assignment) {
             </div>
 
             <div>
-                <img src="./images/${statusImgUrl}" alt="status-img">
+                <img class="status-img" src="./images/${statusImgUrl}" alt="status-img">
             </div>
     </div>
     `).firstChild;
 
+    singleAssignment.querySelector(".status-img").addEventListener("click", async (event) => {
+        event.stopPropagation();
+        const statusImgUrl = (assignment.status === false ? "check.png" : "uncheck.png");
+        const imgUrl = `./images/${statusImgUrl}`;
+        singleAssignment.querySelector(".status-img").setAttribute("src", imgUrl);
+
+        if (!assignment.status) {
+            singleAssignment.classList.remove("late");
+            singleAssignment.classList.add("finished");
+            assignment.status = true;
+
+            //POST to DB
+            addItem(assignment.assignment_id);
+        }
+        else {
+            singleAssignment.classList.remove("finished");
+
+            let finishedStatus = "";
+            let isLate = false;
+            const currentDate = new Date();
+            if (currentDate.getFullYear() != assignment.date.year)
+                isLate = currentDate.getFullYear() > assignment.date.year
+            else if (currentDate.getMonth() != assignment.date.month)
+                isLate = currentDate.getMonth() > assignment.date.month;
+            else if (currentDate.getDate() != assignment.date.day)
+                isLate = currentDate.getDate() > assignment.date.day;
+            else // send assignment today
+                finishedStatus = "due-today";
+
+            if (isLate)
+                finishedStatus = "late";
+
+            assignment.status = false;
+            singleAssignment.classList.add(finishedStatus);
+
+            // DELTE to DB
+
+        }
+    })
+
     singleAssignment.addEventListener("click", async (event) => {
+        event.stopPropagation();
         document.getElementById("background").classList.add("popup-bg-in");
         const popup = document.getElementById("popup-block");
         popup.classList.add("popup");
@@ -118,7 +157,10 @@ async function addAssignment(assignment) {
         </div>
         `);
 
+
+
         const closePopup = (event) => {
+            event.stopPropagation();
 
             popup.classList.remove("popup");
             popup.classList.add("popup-out");
@@ -130,7 +172,7 @@ async function addAssignment(assignment) {
         }
         assignmentPopup.getElementById("close-button").addEventListener("click", closePopup);
         document.getElementById("background").addEventListener("click", closePopup);
-        
+
 
         popup.appendChild(assignmentPopup);
     });

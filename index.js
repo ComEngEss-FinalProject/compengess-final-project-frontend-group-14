@@ -1,12 +1,10 @@
 
 import { drawAssignment } from './WebController/assignment.js';
-import { drawAllSignedCourse, drawAllSemester, drawAllYears, drawAll } from './WebController/sidenav.js'
+import { drawAllSignedCourse, drawAllSemester, drawAllYears } from './WebController/sidenav.js'
 
 import { getSignedCourses, ExtractAssignments } from './Util/CoursesExtractor.js';
 
-// import { assignmentsObj } from './demo.js';
-import { authorizeApplication, getUserProfile, getAllAssignments, logout, assignmentsObj, loginStatus } from './scriptCV.js';
-
+import { getUserProfile, getAllAssignments, logout, assignmentsObj, loginStatus } from './scripts/scriptCV.js';
 
 let currentProperty = {
     year: 0,
@@ -38,6 +36,7 @@ document.addEventListener("DOMContentLoaded", async (event) => {
 
     document.getElementById("status").addEventListener("click", async (event) => {
         currentProperty.status = (currentProperty.status + 1) % 3;
+        window.scrollTo({ top: 0, behavior: 'instant' });
         drawAssignment(assignments, currentProperty);
     });
 

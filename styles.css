@@ -305,6 +305,9 @@ body {
     width: 70px;
 }
 
+.subject img[alt="status-img"]:hover {
+    filter: brightness(0%) invert(1);
+}
 
 .subject>div {
     display: flex;

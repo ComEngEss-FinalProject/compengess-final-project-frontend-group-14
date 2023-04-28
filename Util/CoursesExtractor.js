@@ -4,7 +4,7 @@ Extract example
 Assignment
 [
     {
-        assignmentID: "948056",
+        assignment_id: "948056",
         courseID: "000001",
         courseName: "Computer Engineering Essentials",
         courseSemester: 1,
@@ -14,7 +14,7 @@ Assignment
         date: { day: 12, month: 5, year: 2023 },
         dueTime: 188882,
         imgUrl: "com-eng-ess.png",
-        status: true // dk how to get this info?
+         -- get front Database -> status: true
     }
 ]
 
@@ -30,6 +30,9 @@ signedCourse
 ]
 
 */
+
+import { getItemFromDB, itemsData } from '../scripts/scriptItems.js';
+import { userID } from '../scripts/scriptCV.js';
 
 async function getSignedCourses(allCourseAssignments) {
     let uniqueCourse = [];
@@ -68,6 +71,15 @@ async function getSignedCourses(allCourseAssignments) {
 
 
 async function ExtractAssignments(allCourseAssignments) {
+    await getItemFromDB();
+
+    const userSentAssignments=[];
+    for(const user of itemsData) {
+        if(user.user_id == userID) {
+            userSentAssignments.push(user.user_assignment_id);
+        }
+    }
+
     let extractAssignments = [];
     for (let i = 0; i < allCourseAssignments.length; i++) {
         const currentCourse = allCourseAssignments[i];
@@ -79,7 +91,7 @@ async function ExtractAssignments(allCourseAssignments) {
         for (let j = 0; j < currentCourse.assignment_length; j++) {
             const date = new Date(currentCourse.assignment[j].duedate);
             extractAssignments.push({
-                assignmentID: currentCourse.assignment[j].itemid,
+                assignment_id: currentCourse.assignment[j].itemid,
                 courseID: courseID,
                 courseName: courseName,
                 courseSemester: courseSemester,
@@ -89,7 +101,7 @@ async function ExtractAssignments(allCourseAssignments) {
                 date: { day: date.getDate(), month: date.getMonth(), year: date.getFullYear() },
                 dueTime: currentCourse.assignment[j].duetime,
                 imgUrl: imgUrl,
-                status: false,
+                status: userSentAssignments.contains(currentCourse.assignment[j].itemid), // get from DB Later
             });
         }
     }

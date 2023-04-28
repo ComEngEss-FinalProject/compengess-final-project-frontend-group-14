@@ -6,6 +6,7 @@ const authorizeApplication = () => {
 };
 
 let assignmentsObj, loginStatus = false;
+let userID="";
 
 const getUserProfile = async () => {
     const options = {
@@ -15,6 +16,7 @@ const getUserProfile = async () => {
     await fetch(`http://${backendIPAddress}/courseville/get_profile_info`, options)
         .then((response) => response.json())
         .then((data) => {
+            userID = data.student.id;
             document.querySelector("#info>img").setAttribute("src", `${data.account.profile_pict}`);
             document.querySelectorAll("#info > p")[0].innerHTML = `${data.student.id}`;
             document.querySelectorAll("#info > p")[1].innerHTML = `${data.student.firstname_th} ${data.student.lastname_th}`;
@@ -40,4 +42,4 @@ const logout = async () => {
   };
 
 
-export { authorizeApplication ,getUserProfile, getAllAssignments, logout, assignmentsObj, loginStatus };
+export { authorizeApplication ,getUserProfile, getAllAssignments, logout, assignmentsObj, loginStatus, userID };
