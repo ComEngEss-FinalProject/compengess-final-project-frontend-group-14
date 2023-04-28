@@ -4,7 +4,7 @@ import { drawAllSignedCourse, drawAllSemester, drawAllYears } from './WebControl
 
 import { getSignedCourses, ExtractAssignments } from './Util/CoursesExtractor.js';
 
-import { getUserProfile, getAllAssignments, logout, assignmentsObj, loginStatus } from './scripts/scriptCV.js';
+import { getUserProfile, getAllAssignments, logout, assignmentsObj } from './scripts/scriptCV.js';
 
 let currentProperty = {
     year: 0,
@@ -17,14 +17,9 @@ let allSignedCourse, allAssignments;
 let signedCourse, assignments;
 
 document.addEventListener("DOMContentLoaded", async (event) => {
-    getUserProfile();
-
+    await getUserProfile();
+    
     await getAllAssignments();
-
-    if(loginStatus) {
-        console.log("login status", loginStatus);
-        document.getElementById("login").remove();
-    }
 
     allAssignments = assignments = await ExtractAssignments(assignmentsObj);
     allSignedCourse = signedCourse = await getSignedCourses(assignmentsObj);
@@ -40,7 +35,7 @@ document.addEventListener("DOMContentLoaded", async (event) => {
         drawAssignment(assignments, currentProperty);
     });
 
-    document.getElementById("logout").addEventListener("click", async(event) => {
+    document.getElementById("logout").addEventListener("click", async (event) => {
         logout();
     });
 });
