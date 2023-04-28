@@ -1,5 +1,5 @@
 
-import { addItem } from "../scripts/scriptItems";
+import { addItem, deleteItem } from "../scripts/scriptItems.js";
 
 
 async function drawAssignment(assignments, currentProperty) {
@@ -125,7 +125,7 @@ async function addAssignment(assignment) {
             singleAssignment.classList.add(finishedStatus);
 
             // DELTE to DB
-
+            deleteItem(assignment.assignment_id);
         }
     })
 

@@ -72,13 +72,13 @@ async function getSignedCourses(allCourseAssignments) {
 
 async function ExtractAssignments(allCourseAssignments) {
     await getItemFromDB();
-
     const userSentAssignments=[];
     for(const user of itemsData) {
         if(user.user_id == userID) {
-            userSentAssignments.push(user.user_assignment_id);
+            userSentAssignments.push(user.assignment_id);
         }
     }
+    console.log(userSentAssignments)
 
     let extractAssignments = [];
     for (let i = 0; i < allCourseAssignments.length; i++) {
@@ -90,6 +90,7 @@ async function ExtractAssignments(allCourseAssignments) {
         const imgUrl = currentCourse.course_icon;
         for (let j = 0; j < currentCourse.assignment_length; j++) {
             const date = new Date(currentCourse.assignment[j].duedate);
+            const sentStatus = userSentAssignments.includes((currentCourse.assignment[j].itemid).toString());
             extractAssignments.push({
                 assignment_id: currentCourse.assignment[j].itemid,
                 courseID: courseID,
@@ -101,7 +102,7 @@ async function ExtractAssignments(allCourseAssignments) {
                 date: { day: date.getDate(), month: date.getMonth(), year: date.getFullYear() },
                 dueTime: currentCourse.assignment[j].duetime,
                 imgUrl: imgUrl,
-                status: userSentAssignments.contains(currentCourse.assignment[j].itemid), // get from DB Later
+                status: sentStatus, // get from DB Later
             });
         }
     }

@@ -1,5 +1,5 @@
 
-import { userID } from '../scripts/scriptCV.js';
+import { userID } from './scriptCV.js';
 
 
 const backendIPAddress = '127.0.0.1:3000';
@@ -23,7 +23,7 @@ const getItemFromDB = async () => {
 const addItem = async (assignmentID) => {
     const itemToAdd = {
         user_id : userID,
-        assignment_id: assignmentID
+        assignment_id: assignmentID.toString()
     }
 
     const options = {
@@ -40,4 +40,23 @@ const addItem = async (assignmentID) => {
 
 }
 
-export { itemsData, getItemFromDB, addItem }
+const deleteItem = async(assignmentID) => {
+    const itemToDelete = {
+        user_id : userID,
+        assignment_id: assignmentID.toString()
+    }
+    const options = {
+        method: 'DELETE',
+        credentials: 'include',
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(itemToDelete)
+    }
+
+    await fetch(`http://${backendIPAddress}/courseville/deleteAssignment`, options)
+        .then((response) => console.log(response))
+        .catch((error)=>console.error(error))
+}
+
+export { itemsData, getItemFromDB, addItem, deleteItem }
