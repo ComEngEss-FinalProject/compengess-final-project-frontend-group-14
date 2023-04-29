@@ -1,6 +1,6 @@
 
-const backendIPAddress = '127.0.0.1:3000';
-const frontendIPAddress = '127.0.0.1:5500';
+const backendIPAddress = '3.225.173.255:3000';
+const frontendIPAddress = '3.225.173.255';
 
 const authorizeApplication = () => {
     window.location.href = `http://${backendIPAddress}/courseville/auth_app`;

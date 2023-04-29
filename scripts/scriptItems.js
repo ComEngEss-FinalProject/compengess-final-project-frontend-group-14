@@ -2,7 +2,7 @@
 import { userID } from './scriptCV.js';
 
 
-const backendIPAddress = '127.0.0.1:3000';
+const backendIPAddress = '3.225.173.255:3000';
 
 let itemsData;
 
